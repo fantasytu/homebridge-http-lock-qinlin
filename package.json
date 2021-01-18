@@ -1,11 +1,11 @@
 {
-  "name": "homebridge-http-lock-ultimate",
+  "name": "homebridge-http-lock-qinlin",
   "version": "1.0.0",
-  "description": "This homebridge plugin exposes a web-based locking device to Apple's HomeKit. Using simple HTTP requests with post, body and header support, the plugin allows you to lock/unlock the device, i.e. Shelly 1 devices.",
+  "description": "This homebridge plugin uses the Qinlin Wechat Miniprogram API to open doors.",
   "main": "index.js",
   "engines": {
     "homebridge": ">=0.4",
-    "node": "^10.0.0"
+    "node": "^14.0.0"
   },
   "dependencies": {
     "request": "^2.88.0"
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git:TheRealSimonMlr/homebridge-http-lock-ultimate"
+    "url": "git:fantasytu/homebridge-http-lock-qinlin"
   },
   "keywords": [
     "homebridge-plugin"
   ],
-  "author": "Simon Müller",
+  "author": "Fantasy Tu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheRealSimonMlr/homebridge-http-lock-ultimate/issues"
+    "url": "https://github.com/fantasytu/homebridge-http-qinlin/issues"
   },
-  "homepage": "https://github.com/TheRealSimonMlr/homebridge-http-lock-ultimate#readme"
+  "homepage": "https://github.com/fantasytu/homebridge-http-qinlin#readme"
 }
