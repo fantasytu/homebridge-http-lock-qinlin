@@ -1,7 +1,5 @@
 # homebridge-http-qinlin
 
-[![npm](https://img.shields.io/npm/v/homebridge-http-lock-ultimate.svg)](https://www.npmjs.com/package/homebridge-http-lock-ultimate) [![npm](https://img.shields.io/npm/dt/homebridge-http-lock-ultimate.svg)](https://www.npmjs.com/package/homebridge-http-lock-ultimate)
-
 ## Description
 
 This plugin [homebridge](https://github.com/nfarina/homebridge) uses the Qinlin Wechat Miniprogram API to open doors.
