@@ -18,7 +18,7 @@ Configuration example for a Shelly 1 device controlled via Get Requests in local
      {
       "accessory": "HTTPLockQinLin",
       "name": "Front Door",
-      "sessionId": "2c9a195976f6edc5017715ba89c73fb3"
+      "sessionId": "wxmini:2c9a195976f6edc5017715ba89c73fb3"
       }
 ]
 ```

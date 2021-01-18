@@ -68,7 +68,7 @@ class HTTPLockQinLin {
       this.log('[*] Closed the lock')
       return
     } else {
-      var openDoorURLWithSession = HTTPLockQinLin.openDoorURL + '?sessionId=wxmini:' + this.sessionId
+      var openDoorURLWithSession = HTTPLockQinLin.openDoorURL + '?sessionId=' + this.sessionId
 
       this._httpRequest(openDoorURLWithSession, null, '', this.http_method, function (error, response, responseBody) {
           if (error) {
@@ -90,7 +90,7 @@ class HTTPLockQinLin {
   }
 
   refreshSession () {
-    var refreshSessionURLWithSession = HTTPLockQinLin.refreshSessionURL + '?sessionId=wxmini:' + this.sessionId
+    var refreshSessionURLWithSession = HTTPLockQinLin.refreshSessionURL + '?sessionId=' + this.sessionId
 
     this._httpRequest(refreshSessionURLWithSession, null, '', this.http_method, function (error, response, responseBody) {
         if (error) {
