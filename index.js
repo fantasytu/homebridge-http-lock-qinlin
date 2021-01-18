@@ -66,6 +66,7 @@ class HTTPLockQinLin {
     if (value === 1) {
       this.service.setCharacteristic(Characteristic.LockCurrentState, Characteristic.LockCurrentState.SECURED)
       this.log('[*] Closed the lock')
+      callback()
       return
     } else {
       var openDoorURLWithSession = HTTPLockQinLin.openDoorURL + '?sessionId=' + this.sessionId
