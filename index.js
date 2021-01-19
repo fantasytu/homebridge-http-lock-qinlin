@@ -23,6 +23,7 @@ class HTTPLockQinLin {
     this.http_method = 'POST'
 
     this.sessionId = config.sessionId
+    this.communityId = config.communityId
 
     this.autoLock = config.autoLock || true
     this.autoLockDelay = config.autoLockDelay || 10
@@ -38,6 +39,10 @@ class HTTPLockQinLin {
 
   static get openDoorURL() {
     return 'https://mobileapi.qinlinkeji.com/api/open/doorcontrol/v2/open'
+  }
+
+  static get getCommonlyUsedDoorURL() {
+    return 'https://mobileapi.qinlinkeji.com/api/doorcontrol/queryUserDoorByCache'
   }
 
   identify (callback) {
@@ -70,8 +75,9 @@ class HTTPLockQinLin {
       return
     } else {
       var openDoorURLWithSession = HTTPLockQinLin.openDoorURL + '?sessionId=' + this.sessionId
+      var body = `doorControlId=${this.commonlyUsedDoor.doorControlId}&macAddress=${this.commonlyUsedDoor.macAddress}&communityId=${this.communityId}`
 
-      this._httpRequest(openDoorURLWithSession, null, '', this.http_method, function (error, response, responseBody) {
+      this._httpRequest(openDoorURLWithSession, null, body, this.http_method, function (error, response, responseBody) {
           if (error) {
             this.log('[!] Error setting LockTargetState: %s', error.message)
             callback(error)
@@ -111,6 +117,23 @@ class HTTPLockQinLin {
     }.bind(this))
   }
 
+  getDoorId () {
+    var getCommonlyUsedDoorURLWithSession = HTTPLockQinLin.getCommonlyUsedDoorURL + '?sessionId=' + this.sessionId
+
+    this._httpRequest(getCommonlyUsedDoorURLWithSession, null, 'communityId=10598', this.http_method, function (error, response, responseBody) {
+        if (error) {
+          this.log('[!] Error getting door Id: %s', error.message)
+        }
+        else {
+          var result = JSON.parse(responseBody)
+          if (result.code === 0) {
+            this.commonlyUsedDoor = result.data.commonlyUsedDoor
+            this.log('[*] Get Commonly Used Door Id: %s', this.commonlyUsedDoor.doorControlId)
+          }
+        }
+    }.bind(this))
+  }
+
   autoLockFunction () {
     this.log('[+] Waiting %s seconds for autolock', this.autoLockDelay)
     setTimeout(() => {
@@ -134,6 +157,7 @@ class HTTPLockQinLin {
       .getCharacteristic(Characteristic.LockTargetState)
       .on('set', this.setLockTargetState.bind(this))
 
+    this.getDoorId()
     this.refreshSession()
 
     return [this.informationService, this.service]
