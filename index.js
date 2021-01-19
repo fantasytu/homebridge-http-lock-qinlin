@@ -120,7 +120,7 @@ class HTTPLockQinLin {
   getDoorId () {
     var getCommonlyUsedDoorURLWithSession = HTTPLockQinLin.getCommonlyUsedDoorURL + '?sessionId=' + this.sessionId
 
-    this._httpRequest(getCommonlyUsedDoorURLWithSession, null, 'communityId=10598', this.http_method, function (error, response, responseBody) {
+    this._httpRequest(getCommonlyUsedDoorURLWithSession, null, `communityId=${this.communityId}`, this.http_method, function (error, response, responseBody) {
         if (error) {
           this.log('[!] Error getting door Id: %s', error.message)
         }
@@ -157,8 +157,8 @@ class HTTPLockQinLin {
       .getCharacteristic(Characteristic.LockTargetState)
       .on('set', this.setLockTargetState.bind(this))
 
-    this.getDoorId()
     this.refreshSession()
+    this.getDoorId()
 
     return [this.informationService, this.service]
   }
