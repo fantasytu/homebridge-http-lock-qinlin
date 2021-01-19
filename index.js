@@ -53,6 +53,8 @@ class HTTPLockQinLin {
   _httpRequest (url, headers, body, method, callback) {
     request({
       url: url,
+      headers: headers,
+      body: body,
       method: this.http_method,
       timeout: this.timeout,
       rejectUnauthorized: false
@@ -75,9 +77,10 @@ class HTTPLockQinLin {
       return
     } else {
       var openDoorURLWithSession = HTTPLockQinLin.openDoorURL + '?sessionId=' + this.sessionId
+      var headers = {'Content-Type':'application/x-www-form-urlencoded'}
       var body = `doorControlId=${this.commonlyUsedDoor.doorControlId}&macAddress=${this.commonlyUsedDoor.macAddress}&communityId=${this.communityId}`
 
-      this._httpRequest(openDoorURLWithSession, null, body, this.http_method, function (error, response, responseBody) {
+      this._httpRequest(openDoorURLWithSession, headers, body, this.http_method, function (error, response, responseBody) {
           if (error) {
             this.log('[!] Error setting LockTargetState: %s', error.message)
             callback(error)
@@ -119,8 +122,10 @@ class HTTPLockQinLin {
 
   getDoorId () {
     var getCommonlyUsedDoorURLWithSession = HTTPLockQinLin.getCommonlyUsedDoorURL + '?sessionId=' + this.sessionId
+    var headers = {'Content-Type':'application/x-www-form-urlencoded'}
+    var body = `communityId=${this.communityId}`
 
-    this._httpRequest(getCommonlyUsedDoorURLWithSession, null, `communityId=${this.communityId}`, this.http_method, function (error, response, responseBody) {
+    this._httpRequest(getCommonlyUsedDoorURLWithSession, headers, body, this.http_method, function (error, response, responseBody) {
         if (error) {
           this.log('[!] Error getting door Id: %s', error.message)
         }
